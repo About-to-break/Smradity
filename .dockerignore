@@ -1,0 +1,6 @@
+/tmp
+.idea/
+
+.gitignore
+.air.toml
+LICENSE
