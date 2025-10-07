@@ -1,15 +1,11 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"Smradity/internal"
 )
 
 func main() {
-	router := gin.Default()
-
-	router.GET("/", func(context *gin.Context) {
-		context.JSON(200, gin.H{"message": "Hello World"})
-	})
+	router := internal.SetupRouters()
 
 	err := router.Run(":9080")
 	if err != nil {
