@@ -8,3 +8,31 @@ services:
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
 
+  mongo:
+    container_name: mongodb
+    image: mongo:7
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${MONGO_PORT}:${MONGO_PORT}"
+    volumes:
+      - mongo_data:/data/db
+      - mongo_config:/data/configb
+  # TODO: Починить express
+  mongo-express:
+    image: mongo-express
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${ME_PORT}:8081"
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
+  mongo_config:
+
+
+

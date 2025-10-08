@@ -1,7 +1,7 @@
 DOCKER_COMPOSE = docker compose
 COMPOSE_FILE = docker-compose.yml
 
-.PHONY: run stop logs rebuild build check-config
+.PHONY: run stop logs rebuild build config drain
 
 run:
 	$(DOCKER_COMPOSE) up -d
@@ -20,5 +20,8 @@ rebuild:
 build:
 	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) build
 
-check-config:
+config:
 	$(DOCKER_COMPOSE) config
+
+drain:
+	$(DOCKER_COMPOSE) down -v
