@@ -1,16 +1,19 @@
 package main
 
 import (
-	"Smradity/internal"
 	"Smradity/internal/config"
+	"Smradity/internal/db"
+	"Smradity/internal/logger"
+	"Smradity/internal/router"
 )
 
 func main() {
 	cfg := config.LoadConfig()
-	internal.SetupLogger(cfg.LogLevel)
-	router := internal.SetupRouters()
+	logger.SetupLogger(cfg.LogLevel)
+	db.SetupMgmConnection(cfg.DatabaseName, cfg.DatabaseURI)
+	r := router.SetupRouters()
 
-	err := router.Run(":" + cfg.ServerPort)
+	err := r.Run(":" + cfg.ServerPort)
 	if err != nil {
 		return
 	}

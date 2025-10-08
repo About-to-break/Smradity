@@ -1,4 +1,4 @@
-package internal
+package logger
 
 import (
 	"log/slog"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var Log *slog.Logger
+var Logger *slog.Logger
 
 func SetupLogger(level string) {
 	var lvl slog.Level
@@ -28,7 +28,9 @@ func SetupLogger(level string) {
 		Level:     lvl, // фильтр уровня
 	})
 
-	Log = slog.New(handler)
+	Logger = slog.New(handler)
 
-	Log.Info("Logger initialized", "level", level)
+	slog.SetDefault(Logger)
+
+	slog.Info("Logger initialized", "level", level)
 }
